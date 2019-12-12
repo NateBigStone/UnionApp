@@ -1,100 +1,140 @@
 package com.nathan.unionapp;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     //GAUT63EA
-    //https://union-rsvp.firebaseapp.com/api/v1/rsvps/DANI93E1
+    //rsvps/DANI93E1
+    //wedding/COST29BB
 
-    private Button mButton;
+    //TODO: Add image and meal Choices to wedding schema
+    //TODO: Enter Reservation code
+    //TODO: INPUT validation on code
+    //TODO: loading bar while the call is made
+    //TODO: CREATE AN ARRAY OF PRESENT QUESTIONS
+    //TODO: CREATE AN ARRAY OF NULL QUESTIONS
+    //TODO: VERIFY THE USER IF NOT KICK BACK TO BEGINNING
+    //TODO: Verify Wedding If not error fragment
+    //TODO: if the user and wedding exists tell them if they are in the wedding party
+    //TODO: VERIFY INFO AND SAVE
+    //TODO: PROGRESS BAR for form
+    //TODO: FANCY INFO FOR WEDDING: MAP INTENT, EMAIL ORGANIZER, DATE COUNTDOWN
+
+    private EditText mCodeText;
+    private Button mRSVPButton;
+    private String mRSVPCode;
+
+    public static final String EXTRA_INVITATION_CODE = "com.nathan.unionapp.invitationcode";
+    private static final int INVITATION_REQUEST_CODE = 0;
 
     //Logging thing
     private static final String TAG = "RESULT_RSVP";
     //API Response
     private RSVPdata mRSVPResponse;
+    private WeddingData mWeddingResponse;
+    private String mWeddingCode;
+
+    private static final String[] INFO = {
+            "Is this your name?",
+            "Are you able to attend the Costanza wedding?",
+            "Is this your contact info?",
+            "What meal would you like?",
+            "Are you bringing a guest?",
+            "Enter/Verify Guest/'s name",
+            "Guest Meal Choice"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButton = findViewById(R.id.button);
+        mCodeText = findViewById(R.id.invite_code);
+        mRSVPButton = findViewById(R.id.rsvp_button);
 
-        mButton.setOnClickListener(new View.OnClickListener() {
+        mRSVPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (mReservationCode.isEmpty()) {
-//                    Toast.makeText(MainActivity.this, "Enter a Code", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                mRSVPCode = mCodeText.getText().toString().trim().toUpperCase();
+                if (mRSVPCode.length() != 8) {
+                    Toast.makeText(MainActivity.this, "Please Enter a Valid Invite Code", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 hideKeyboard();
-                getRSVPCall();
-//                mReservationCode.setText(R.string.empty);
-
+                mCodeText.setText(""); //TODO: proper clear this
+                //send this to an intent
+                Intent mInvitationIntent = new Intent(MainActivity.this, InvitationActivity.class);
+                mInvitationIntent.putExtra(EXTRA_INVITATION_CODE, mRSVPCode);
+                startActivityForResult(mInvitationIntent, INVITATION_REQUEST_CODE);
             }
         });
+
+//        mWeddingButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                if (mReservationCode.isEmpty()) {
+////                    Toast.makeText(MainActivity.this, "Enter a Code", Toast.LENGTH_SHORT).show();
+////                    return;
+////                }
+//                hideKeyboard();
+//                getWeddingCall(mWeddingCode);
+////                mReservationCode.setText(R.string.empty);
+//
+//            }
+//        });
     }
 
-    private void getRSVPCall() {
 
-        //Retrofit Debugging
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build();
 
-        OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl()
-                .addConverterFactory(JacksonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
-
-        ReservationService mReservationService = retrofit.create(ReservationService.class);
-
-        String mCode = "DANI93E1";
-
-        mReservationService.getRSVP(mCode).enqueue(new Callback<RSVPdata>() {
-            @Override
-            public void onResponse(@NonNull Call<RSVPdata> call, @NonNull Response<RSVPdata> response) {
-                mRSVPResponse = response.body();
-                Log.d("Response_body", mRSVPResponse.toString());
-                //if api response is valid
-                if (mRSVPResponse != null) {
-                    //Set the texts
-                    //setTexts(mSymbolResponse);
-                }
-                else {
-                    Toast.makeText(MainActivity.this,"Unable to get information", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<RSVPdata> call, Throwable t) {
-                Log.e(TAG, "Error getting info", t);
-                //Toast.makeText(getContext(),"Unable to get information", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+ //   private void getWeddingCall(String mWeddingCode) {
+//
+//        //Retrofit Debugging (Currently not used)
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(logging)
+//                .build();
+//
+//        OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(BuildConfig.BASE_URL)
+//                .addConverterFactory(JacksonConverterFactory.create())
+//                .client(okHttpClient)
+//                .build();
+//
+//        ReservationService mReservationService = retrofit.create(ReservationService.class);
+//
+//        mReservationService.getWedding(mWeddingCode).enqueue(new Callback<WeddingData>() {
+//            @Override
+//            public void onResponse(@NonNull Call<WeddingData> call, @NonNull Response<WeddingData> response) {
+//                mWeddingResponse = response.body();
+//                //if api response is valid
+//                if (mWeddingResponse != null) {
+//                    Log.d("Wedding_Response_body", mWeddingResponse.toString());
+//                    //Do things
+//                }
+//                else {
+//                    Toast.makeText(MainActivity.this,"Unable to get information", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<WeddingData> call, Throwable t) {
+//                Log.e(TAG, "Error getting info", t);
+//                Toast.makeText(MainActivity.this,"Unable to get information", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 
     private void hideKeyboard() {
         View mainView = findViewById(android.R.id.content);

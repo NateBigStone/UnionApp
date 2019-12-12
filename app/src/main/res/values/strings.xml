@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UnionApp</string>
+    <string name="enter_code">Please Enter Invite Code</string>
+    <string name="continue_button">Continue</string>
 </resources>
