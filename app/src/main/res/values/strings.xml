@@ -3,4 +3,6 @@
     <string name="enter_code">Please Enter Invite Code</string>
     <string name="continue_button">Continue</string>
     <string name="request">The honor of your presence is requested at the marriage of</string>
+    <string name="attend_button">yes, i can attend</string>
+    <string name="decline_button">cannot make it</string>
 </resources>

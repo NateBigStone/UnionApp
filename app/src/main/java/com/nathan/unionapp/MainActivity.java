@@ -16,14 +16,10 @@ public class MainActivity extends AppCompatActivity {
     //rsvps/DANI93E1
     //wedding/COST29BB
 
-    //TODO: Add image and meal Choices to wedding schema
     //TODO: CREATE AN ARRAY OF PRESENT QUESTIONS
     //TODO: CREATE AN ARRAY OF NULL QUESTIONS
-    //TODO: VERIFY THE USER IF NOT KICK BACK TO BEGINNING
-    //TODO: Verify Wedding If not error fragment
     //TODO: if the user and wedding exists tell them if they are in the wedding party
     //TODO: VERIFY INFO AND SAVE
-    //TODO: PROGRESS BAR for form
     //TODO: FANCY INFO FOR WEDDING: MAP INTENT, EMAIL ORGANIZER, DATE COUNTDOWN
 
     private EditText mCodeText;

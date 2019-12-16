@@ -18,6 +18,27 @@ public class RSVPinfo {
     public String street;
     public String guestFirstName;
 
+//    RSVPinfo(String mealChoice,String weddingID,String lastName,String attending,
+//             String mealChoiceGuest,String firstName,String weddingParty,String phone,String guest,
+//             String zip,String guestLastName,String state,String email,String street,
+//             String guestFirstName){
+//
+//        this.mealChoice = mealChoice;
+//        this.weddingID = weddingID;
+//        this.lastName = lastName;
+//        this.attending = attending;
+//        this.mealChoiceGuest = mealChoiceGuest;
+//        this.firstName = firstName;
+//        this.weddingParty = weddingParty;
+//        this.phone = phone;
+//        this.guest = guest;
+//        this.zip = zip;
+//        this.guestLastName = guestLastName;
+//        this.state = state;
+//        this.email = email;
+//        this.street = street;
+//        this.guestFirstName = guestFirstName;
+//    }
 
     @Override
     public String toString() {

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class InvitationActivity extends AppCompatActivity {
     //View things
     private ProgressBar mLoading;
     private TextView mFullName;
+    private TextView mRequest;
 
     //Create HTTP Client
     private OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
@@ -66,6 +68,8 @@ public class InvitationActivity extends AppCompatActivity {
         //View things
         mLoading = findViewById(R.id.progress_bar);
         mFullName = findViewById(R.id.full_name);
+        mRequest = findViewById(R.id.request);
+        mRequest.setVisibility(GONE);
 
 
 
@@ -125,5 +129,6 @@ public class InvitationActivity extends AppCompatActivity {
     private void setInvitation(){
         mLoading.setVisibility(GONE);
         mFullName.setText(mRSVPResponse.rsvpInfo.firstName + " " + mRSVPResponse.rsvpInfo.lastName + ",");
+        mRequest.setVisibility(View.VISIBLE);
     }
 }
