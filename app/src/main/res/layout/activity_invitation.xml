@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".InvitationActivity">
 
-
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
@@ -17,32 +16,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/full_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginBottom="20dp"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/request"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="full name" />
 
     <TextView
         android:id="@+id/request"
-        android:layout_width="0dp"
+        android:layout_width="322dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
         android:text="@string/request"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/participant_one"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/full_name" />
 
@@ -67,5 +64,89 @@
         android:text="@string/decline_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/participant_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/ampersand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/request"
+        tools:text="name one" />
+
+    <TextView
+        android:id="@+id/ampersand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/amp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/participant_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/participant_one" />
+
+    <TextView
+        android:id="@+id/participant_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/on_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ampersand"
+        tools:text="name two" />
+
+    <TextView
+        android:id="@+id/on_text"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:text="@string/on_text"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/date_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/participant_two" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/in_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/on_text"
+        tools:text="date" />
+
+    <TextView
+        android:id="@+id/in_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/in_text"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/location_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_text" />
+
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/attend_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/in_text"
+        tools:text="location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,13 @@ package com.nathan.unionapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +39,15 @@ public class InvitationActivity extends AppCompatActivity {
     private ProgressBar mLoading;
     private TextView mFullName;
     private TextView mRequest;
+    private TextView mParticipantOne;
+    private TextView mParticipantTwo;
+    private TextView mAmp;
+    private TextView mOnText;
+    private TextView mDateText;
+    private TextView mInText;
+    private TextView mLocationText;
+    private Button mAttendButton;
+    private Button mDeclineButton;
 
     //Create HTTP Client
     private OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
@@ -70,11 +82,39 @@ public class InvitationActivity extends AppCompatActivity {
         mFullName = findViewById(R.id.full_name);
         mRequest = findViewById(R.id.request);
         mRequest.setVisibility(GONE);
+        mParticipantOne = findViewById(R.id.participant_one);
+        mAmp = findViewById(R.id.ampersand);
+        mAmp.setVisibility(GONE);
+        mParticipantTwo = findViewById(R.id.participant_two);
+        mOnText = findViewById(R.id.on_text);
+        mOnText.setVisibility(GONE);
+        mDateText = findViewById(R.id.date_text);
+        mInText = findViewById(R.id.in_text);
+        mInText.setVisibility(GONE);
+        mLocationText = findViewById(R.id.location_text);
+        mAttendButton = findViewById(R.id.attend_button);
+        mAttendButton.setVisibility(GONE);
+        mDeclineButton = findViewById(R.id.decline_button);
+        mDeclineButton.setVisibility(GONE);
 
-
-
+        mAttendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //send this to an intent
+            Intent mInvitationIntent = new Intent(InvitationActivity.this, InvitationActivity.class);
+            //mInvitationIntent.putExtra(EXTRA_INVITATION_CODE, mRSVPCode);
+            //startActivityForResult(mInvitationIntent, INVITATION_REQUEST_CODE);
+            }
+        });
+        mDeclineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //TODO: Send this to the registry information
+            Toast.makeText(InvitationActivity.this,"Sorry you can\'t make it", Toast.LENGTH_LONG).show();
+            InvitationActivity.this.finish();
+            }
+        });
     }
-
 
     private void getRSVPCall(String mInviteCode) {
 
@@ -130,5 +170,14 @@ public class InvitationActivity extends AppCompatActivity {
         mLoading.setVisibility(GONE);
         mFullName.setText(mRSVPResponse.rsvpInfo.firstName + " " + mRSVPResponse.rsvpInfo.lastName + ",");
         mRequest.setVisibility(View.VISIBLE);
+        mAmp.setVisibility(View.VISIBLE);
+        mParticipantOne.setText(mWeddingResponse.weddingInfo.participantOneName);
+        mParticipantTwo.setText(mWeddingResponse.weddingInfo.participantTwoName);
+        mOnText.setVisibility(View.VISIBLE);
+        mDateText.setText(mWeddingResponse.weddingInfo.weddingDate);
+        mInText.setVisibility(View.VISIBLE);
+        mLocationText.setText(mWeddingResponse.weddingInfo.weddingLocation);
+        mAttendButton.setVisibility(View.VISIBLE);
+        mDeclineButton.setVisibility(View.VISIBLE);
     }
 }

@@ -5,4 +5,7 @@
     <string name="request">The honor of your presence is requested at the marriage of</string>
     <string name="attend_button">yes, i can attend</string>
     <string name="decline_button">cannot make it</string>
+    <string name="amp">&amp;</string>
+    <string name="on_text">on</string>
+    <string name="in_text">in</string>
 </resources>
