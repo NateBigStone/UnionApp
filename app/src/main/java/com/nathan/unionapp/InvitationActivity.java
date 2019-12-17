@@ -13,6 +13,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +33,12 @@ public class InvitationActivity extends AppCompatActivity {
 
     //Intent from activity
     private String mInviteCode;
+
+    //For sending extras
+    public static final String EXTRA_RSVP_OBJECT = "com.nathan.unionapp.rsvpobject";
+    public static final String EXTRA_WEDDING_OBJECT = "com.nathan.unionapp.weddingobject";
+
+    private static final int CONTACT_CODE = 1;
 
     //Variables I need
     private RSVPdata mRSVPResponse;
@@ -174,7 +184,16 @@ public class InvitationActivity extends AppCompatActivity {
         mParticipantOne.setText(mWeddingResponse.weddingInfo.participantOneName);
         mParticipantTwo.setText(mWeddingResponse.weddingInfo.participantTwoName);
         mOnText.setVisibility(View.VISIBLE);
-        mDateText.setText(mWeddingResponse.weddingInfo.weddingDate);
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+
+        String mDateString = "";
+        try {
+            mDateString = formatter.format(parser.parse(mWeddingResponse.weddingInfo.weddingDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mDateText.setText(mDateString);
         mInText.setVisibility(View.VISIBLE);
         mLocationText.setText(mWeddingResponse.weddingInfo.weddingLocation);
         mAttendButton.setVisibility(View.VISIBLE);

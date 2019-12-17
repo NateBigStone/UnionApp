@@ -29,7 +29,9 @@
         app:layout_constraintBottom_toTopOf="@+id/request"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="full name" />
+        tools:text="full name"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/request"
@@ -41,7 +43,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/full_name" />
+        app:layout_constraintTop_toBottomOf="@+id/full_name"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"
+        android:gravity="center"
+        />
 
     <Button
         android:id="@+id/attend_button"
@@ -75,19 +81,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/request"
-        tools:text="name one" />
+        tools:text="name one"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/ampersand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/amp"
-        android:textSize="40sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/participant_two"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/participant_one" />
+        app:layout_constraintTop_toBottomOf="@+id/participant_one"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/participant_two"
@@ -99,19 +109,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ampersand"
-        tools:text="name two" />
+        tools:text="name two"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/on_text"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="@string/on_text"
-        android:textSize="40sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/date_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/participant_two" />
+        app:layout_constraintTop_toBottomOf="@+id/participant_two"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/date_text"
@@ -123,19 +137,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/on_text"
-        tools:text="date" />
+        tools:text="date"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/in_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/in_text"
-        android:textSize="40sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/location_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_text" />
+        app:layout_constraintTop_toBottomOf="@+id/date_text"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
     <TextView
         android:id="@+id/location_text"
@@ -147,6 +165,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/in_text"
-        tools:text="location" />
+        tools:text="location"
+        android:fontFamily="cursive"
+        android:textStyle="normal|bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
