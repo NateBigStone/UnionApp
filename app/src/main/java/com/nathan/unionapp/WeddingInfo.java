@@ -13,6 +13,8 @@ public class WeddingInfo {
     public String surname;
     public String instructions;
     public String participantOneName;
+    public String weddingRegistry;
+    public Meals meals;
 
     @Override
     public String toString() {
@@ -28,6 +30,8 @@ public class WeddingInfo {
                 "\"surname\":\""+ surname +"\"," +
                 "\"instructions\":\""+ instructions +"\"" +
                 "\"participantOneName\":\""+ participantOneName +"\"" +
+                "\"weddingRegistry\":\""+ weddingRegistry +"\"" +
+                "\"meals\":\""+ meals +"\"" +
                 "}";
     }
 }

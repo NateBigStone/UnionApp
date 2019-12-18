@@ -1,14 +1,15 @@
 package com.nathan.unionapp;
+import androidx.annotation.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 
 public class RSVPdata {
-    @JsonAlias({"rsvpInfo", "data"})
-    public RSVPinfo rsvpInfo;
+
     public String id;
 
-    public void setInfo(RSVPinfo rsvpInfo) {
-        this.rsvpInfo = rsvpInfo;
-    }
+    @JsonAlias({"rsvpInfo", "data"})
+    @Nullable
+    public RSVPinfo rsvpInfo;
 
     @Override
     public String toString() {

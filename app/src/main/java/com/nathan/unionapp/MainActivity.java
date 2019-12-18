@@ -12,15 +12,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    //rsvps/GAUT63EA
-    //rsvps/DANI93E1
-    //wedding/COST29BB
-
-    //TODO: CREATE AN ARRAY OF PRESENT QUESTIONS
-    //TODO: CREATE AN ARRAY OF NULL QUESTIONS
-    //TODO: if the user and wedding exists tell them if they are in the wedding party
-    //TODO: VERIFY INFO AND SAVE
-    //TODO: FANCY INFO FOR WEDDING: MAP INTENT, EMAIL ORGANIZER, DATE COUNTDOWN
+    //rsvps/GAUTE6B9
+    //rsvps/DANI41FB
+    //wedding/COSTD725
 
     private EditText mCodeText;
     private Button mRSVPButton;
@@ -28,16 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_INVITATION_CODE = "com.nathan.unionapp.invitationcode";
     private static final int INVITATION_REQUEST_CODE = 0;
-
-    private static final String[] INFO = {
-            "Is this your name?",
-            "Are you able to attend the Costanza wedding?",
-            "Is this your contact info?",
-            "What meal would you like?",
-            "Are you bringing a guest?",
-            "Enter/Verify Guest/'s name",
-            "Guest Meal Choice"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

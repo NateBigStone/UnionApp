@@ -10,6 +10,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 //https://futurestud.io/tutorials/retrofit-2-how-to-trust-unsafe-ssl-certificates-self-signed-expired
 
@@ -49,8 +50,10 @@ public class UnsafeOkHttpClient {
                     return true;
                 }
             });
-
-            OkHttpClient okHttpClient = builder.build();
+            //Retrofit Debugging
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            OkHttpClient okHttpClient = builder.addInterceptor(logging).build();
             return okHttpClient;
         } catch (Exception e) {
             throw new RuntimeException(e);

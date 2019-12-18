@@ -2,7 +2,6 @@ package com.nathan.unionapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +12,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +52,8 @@ public class InvitationActivity extends AppCompatActivity {
     private RSVPdata mRSVPResponse;
     private String mWeddingCode;
     private WeddingData mWeddingResponse;
+    private String mBody;
+    private RSVPdata mUpdateRSVPResponse;
 
     //View things
     private ProgressBar mLoading;
@@ -78,7 +88,6 @@ public class InvitationActivity extends AppCompatActivity {
 
         if (this.getIntent().getExtras() != null) {
             mInviteCode = getIntent().getStringExtra(MainActivity.EXTRA_INVITATION_CODE);
-            //Log.d(TAG, this.getIntent().getExtras().toString());
             Log.d(TAG, mInviteCode);
             getRSVPCall(mInviteCode);
         }
@@ -111,15 +120,19 @@ public class InvitationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             //send this to an intent
-            Intent mInvitationIntent = new Intent(InvitationActivity.this, InvitationActivity.class);
-            //mInvitationIntent.putExtra(EXTRA_INVITATION_CODE, mRSVPCode);
-            //startActivityForResult(mInvitationIntent, INVITATION_REQUEST_CODE);
+            mBody = "{\"attending\":\"true\"}";
+            RequestBody mRequestBody = RequestBody.create(MediaType.parse("application/json"), mBody);
+            updateRSVPCall(mRequestBody);
+            Toast.makeText(InvitationActivity.this,"Glad you can attend", Toast.LENGTH_LONG).show();
+            gotoRegistry("attend");
             }
         });
         mDeclineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //TODO: Send this to the registry information
+            mBody = "{\"attending\":\"false\"}";
+            RequestBody mRequestBody = RequestBody.create(MediaType.parse("application/json"), mBody);
+            updateRSVPCall(mRequestBody);
             Toast.makeText(InvitationActivity.this,"Sorry you can\'t make it", Toast.LENGTH_LONG).show();
             InvitationActivity.this.finish();
             }
@@ -176,6 +189,31 @@ public class InvitationActivity extends AppCompatActivity {
         });
     }
 
+    private void updateRSVPCall(RequestBody mBody) {
+
+        mReservationService.updateRSVP(mRSVPResponse.id, mBody).enqueue(new Callback<RSVPdata>() {
+            @Override
+            public void onResponse(Call<RSVPdata> call, Response<RSVPdata> response) {
+                mUpdateRSVPResponse = response.body();
+                //if api response is valid
+                if(mUpdateRSVPResponse != null) {
+                    Log.e("UPDATE SUCCESSFUL?", mUpdateRSVPResponse.toString());
+                    Toast.makeText(InvitationActivity.this,"RSVP Updated", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(InvitationActivity.this,"Unable to update RSVP information", Toast.LENGTH_LONG).show();
+                    InvitationActivity.this.finish();
+                }
+            }
+            @Override
+            public void onFailure(Call<RSVPdata> call, Throwable t) {
+                Log.e(TAG, "Error getting info", t);
+                Toast.makeText(InvitationActivity.this,"Unable to update RSVP information", Toast.LENGTH_LONG).show();
+                InvitationActivity.this.finish();
+            }
+        });
+    }
+
     private void setInvitation(){
         mLoading.setVisibility(GONE);
         mFullName.setText(mRSVPResponse.rsvpInfo.firstName + " " + mRSVPResponse.rsvpInfo.lastName + ",");
@@ -198,5 +236,15 @@ public class InvitationActivity extends AppCompatActivity {
         mLocationText.setText(mWeddingResponse.weddingInfo.weddingLocation);
         mAttendButton.setVisibility(View.VISIBLE);
         mDeclineButton.setVisibility(View.VISIBLE);
+    }
+
+    private void gotoRegistry(String mAttending){
+        Intent mRegistryIntent = new Intent(InvitationActivity.this, RegistryActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("EXTRA_REGISTRY", mWeddingResponse.weddingInfo.weddingRegistry);
+        extras.putString("EXTRA_WEDDING_DATE", mWeddingResponse.weddingInfo.weddingDate);
+        extras.putString("EXTRA_RSVP", mAttending);
+        mRegistryIntent.putExtras(extras);
+        startActivityForResult(mRegistryIntent, CONTACT_CODE);
     }
 }

@@ -1,5 +1,8 @@
 package com.nathan.unionapp;
 
+import org.json.JSONObject;
+
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -14,6 +17,6 @@ public interface ReservationService {
     @GET("wedding/{weddingCode}")
     Call<WeddingData> getWedding(@Path("weddingCode") String mWeddingCode);
 
-    @PUT("rsvps")
-    Call<RSVPdata> updateRSVP(@Path("RSVPCode") String mRSVPCode, @Body RSVPinfo mInfo);
+    @PUT("rsvps/{RSVPCode}")
+    Call<RSVPdata> updateRSVP(@Path("RSVPCode") String mRSVPCode, @Body RequestBody mBody);
 }
