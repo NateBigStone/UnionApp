@@ -224,7 +224,6 @@ public class InvitationActivity extends AppCompatActivity {
         mOnText.setVisibility(View.VISIBLE);
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-
         String mDateString = "";
         try {
             mDateString = formatter.format(parser.parse(mWeddingResponse.weddingInfo.weddingDate));
@@ -241,6 +240,7 @@ public class InvitationActivity extends AppCompatActivity {
     private void gotoRegistry(String mAttending){
         Intent mRegistryIntent = new Intent(InvitationActivity.this, RegistryActivity.class);
         Bundle extras = new Bundle();
+        extras.putString("EXTRA_FIRST_NAME", mRSVPResponse.rsvpInfo.firstName);
         extras.putString("EXTRA_REGISTRY", mWeddingResponse.weddingInfo.weddingRegistry);
         extras.putString("EXTRA_WEDDING_DATE", mWeddingResponse.weddingInfo.weddingDate);
         extras.putString("EXTRA_RSVP", mAttending);

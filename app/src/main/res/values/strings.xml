@@ -8,4 +8,7 @@
     <string name="amp">&amp;</string>
     <string name="on_text">on</string>
     <string name="in_text">in</string>
+    <string name="thank_you_text">we are excited to have you!</string>
+    <string name="registry_button">gift registry</string>
+    <string name="date_string">The wedding is %1$s days away.</string>
 </resources>
